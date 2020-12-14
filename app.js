@@ -23,6 +23,6 @@ app.use("/books", bookRouter);
 app.use("/cart", cartRouter);
 app.use("/wishlist", wishlistRouter);
 
-app.listen(process.env.PORT, () =>
+app.listen(process.env.PORT || 8080, () =>
   console.log(`Running on port ${process.env.PORT}`)
 );
