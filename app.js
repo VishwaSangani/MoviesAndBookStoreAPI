@@ -13,7 +13,7 @@ const cartRouter = require("./routes/carts");
 const wishlistRouter = require("./routes/wishlists");
 
 mongoose.connect(
-  process.env.URL,
+  "mongodb+srv://admin:Password12$@cluster0.s3twr.mongodb.net/StoreDB",
   { useNewUrlParser: true, useUnifiedTopology: true },
   (err) => console.log(process.env.URL, err)
 );
