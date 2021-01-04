@@ -2,6 +2,25 @@ const express = require("express");
 const router = express.Router();
 const Wishlist = require("../models/wishlist");
 
+/**
+ * @swagger
+ * tags:
+ *   name: Wishlist
+ *   description: API to manage wishlist.
+ */
+
+/**
+ * @swagger
+ * /wishlist:
+ *   get:
+ *     summary: Retrieve a wishlist.
+ *     tags:
+ *     - Wishlist
+ *     description: Retrieve a wishlist from databse.
+ *     responses:
+ *       200:
+ *         description: A wishlist.
+ */
 router.get("/", async (req, res) => {
   try {
     const items = await Wishlist.find();
@@ -11,15 +30,37 @@ router.get("/", async (req, res) => {
   }
 });
 
-// router.get("/:id", async (req, res) => {
-//   try {
-//     const item = await Wishlist.findOne({ id: req.params.id });
-//     res.status(200).json(item);
-//   } catch (err) {
-//     res.send("Error" + err);
-//   }
-// });
-
+/**
+ * @swagger
+ * /wishlist:
+ *   post:
+ *     summary: Add product to wishlist.
+ *     tags:
+ *     - Wishlist
+ *     description: Add movie or book to wishlist.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               productId:
+ *                 type: integer
+ *                 description: Numeric ID of the product.
+ *                 example: 1
+ *               category:
+ *                 type: string
+ *                 description: Category of the product.
+ *                 example: "Movie"
+ *               ipAddress:
+ *                 type: string
+ *                 description: IP Address of user.
+ *                 example: "120.72.90.82"
+ *     responses:
+ *       200:
+ *         description: Added product to wishlist.
+ */
 router.post("/", async (req, res) => {
   const item = new Wishlist({
     productId: req.body.productId,
@@ -46,6 +87,25 @@ router.post("/", async (req, res) => {
 //     }
 //   });
 
+/**
+ * @swagger
+ * /wishlist/{id}:
+ *   delete:
+ *     summary: Remove product from wishlist.
+ *     tags:
+ *     - Wishlist
+ *     description: Remove movie or book from wishlist.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Numeric ID of the product to remove.
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Product removed from wishlist.
+ */
 router.delete("/:id", async (req, res) => {
   try {
     const item = await Wishlist.findOne({ id: req.params.id });
