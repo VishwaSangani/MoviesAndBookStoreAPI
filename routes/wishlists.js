@@ -26,7 +26,7 @@ router.get("/", async (req, res) => {
     const items = await Wishlist.find();
     res.status(200).json(items);
   } catch (err) {
-    res.status(404).send("Error" + err);
+    res.status(500).send("Error" + err);
   }
 });
 
@@ -72,7 +72,7 @@ router.post("/", async (req, res) => {
     const a1 = await item.save();
     res.status(200).json(a1);
   } catch (err) {
-    res.status(404).send(`ERROR ${err}`);
+    res.status(500).send(`ERROR ${err}`);
   }
 });
 
@@ -112,7 +112,7 @@ router.delete("/:id", async (req, res) => {
     const a1 = await item.remove();
     res.status(200).json(a1);
   } catch (err) {
-    res.status(404).send("Error" + err);
+    res.status(500).send("Error" + err);
   }
 });
 
